@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blacker.Synology.Api", "Blacker.Synology.Api\Blacker.Synology.Api.csproj", "{D68435E2-3215-4CE6-9FC9-D90675A6AC2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blacker.Synology.Api.Tests", "Blacker.Synology.Api.Tests\Blacker.Synology.Api.Tests.csproj", "{94111BDF-763A-489C-97C4-A341E166FB6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D68435E2-3215-4CE6-9FC9-D90675A6AC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D68435E2-3215-4CE6-9FC9-D90675A6AC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D68435E2-3215-4CE6-9FC9-D90675A6AC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D68435E2-3215-4CE6-9FC9-D90675A6AC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94111BDF-763A-489C-97C4-A341E166FB6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94111BDF-763A-489C-97C4-A341E166FB6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94111BDF-763A-489C-97C4-A341E166FB6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94111BDF-763A-489C-97C4-A341E166FB6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
