@@ -4,6 +4,15 @@ h2. Description
 
 *Unofficial* wrapper for official Synology API, based on the API description found on the official "Synology website(https://www.synology.com/support/developer#tool)":"https://www.synology.com/support/developer#tool"
 
+h2. 3rd party software, libraries, etc.
+
+Blacker's Synology API Wrapper is using following 3rd-party libraries (so far only for unit testing, there is no need to ship them with library):
+
+* NUnit - "http://www.nunit.org/(http://www.nunit.org/)":http://www.nunit.org/
+* Moq - "http://www.moqthis.com/(http://www.moqthis.com/)":http://www.moqthis.com/
+
+most of these libraries are automatically loaded to the solution using "NuGet(http://nuget.codeplex.com/)":http://nuget.codeplex.com/
+
 h2. License
 
 Blacker's Synology API Wrapper
