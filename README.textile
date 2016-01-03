@@ -2,7 +2,7 @@ h1. Blacker's Synology API Wrapper
 
 h2. Description
 
-*Unofficial* wrapper for official Synology API, based on the API description found on the official "Synology website(https://www.synology.com/support/developer#tool)":"https://www.synology.com/support/developer#tool"
+*Unofficial* wrapper for official Synology API, based on the API description found on the official "Synology website(https://www.synology.com/support/developer#tool)":https://www.synology.com/support/developer#tool
 
 h2. 3rd party software, libraries, etc.
 
