@@ -50,6 +50,9 @@
     <Compile Include="Client\IClient.cs" />
     <Compile Include="Client\UriHelper.cs" />
     <Compile Include="Models\ApiInfo.cs" />
+    <Compile Include="Models\AuthInfo.cs" />
+    <Compile Include="Models\DownloadStation\Config.cs" />
+    <Compile Include="Models\DownloadStation\Info.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\ResponseWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,12 +61,13 @@
     <Compile Include="Client\JsonSerializer.cs" />
     <Compile Include="Client\RestClient.cs" />
     <Compile Include="Services\ApiInfoService.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\DownloadStation\IInfoService.cs" />
+    <Compile Include="Services\DownloadStation\InfoService.cs" />
     <Compile Include="Services\IApiInfoService.cs" />
+    <Compile Include="Services\IAuthService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\DownloadStation\" />
-    <Folder Include="Services\DownloadStation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

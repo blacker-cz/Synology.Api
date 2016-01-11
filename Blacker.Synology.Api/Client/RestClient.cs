@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blacker.Synology.Api.Client
 {
-    class RestClient : IClient
+    class RestClient
     {
         private readonly Uri _baseUri;
         private readonly ISerializer _serializer;

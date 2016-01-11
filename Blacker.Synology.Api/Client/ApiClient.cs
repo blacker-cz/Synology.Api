@@ -5,7 +5,7 @@ using Blacker.Synology.Api.Models;
 
 namespace Blacker.Synology.Api.Client
 {
-    class ApiClient : RestClient
+    class ApiClient : RestClient, IClient
     {
         public ApiClient(Uri baseUri) : base(baseUri)
         {
@@ -39,6 +39,11 @@ namespace Blacker.Synology.Api.Client
             {
                 throw new ClientException("There was an issue during communication with API. See inner exception for more details.", e);
             }
+        }
+
+        public Task GetAsync(string path, IDictionary<string, object> parameters)
+        {
+            return GetAsync<object>(path, parameters);
         }
     }
 }

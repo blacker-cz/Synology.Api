@@ -4,7 +4,7 @@ using Blacker.Synology.Api.Models;
 
 namespace Blacker.Synology.Api.Services
 {
-    interface IApiInfoService
+    public interface IApiInfoService
     {
         Task<IDictionary<string, ApiInfo>> ListAvailableApis();
         Task<IDictionary<string, ApiInfo>> ListAvailableApis(IEnumerable<string> apis);

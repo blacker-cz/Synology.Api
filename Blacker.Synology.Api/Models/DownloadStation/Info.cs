@@ -1,0 +1,17 @@
+﻿using System.Runtime.Serialization;
+
+namespace Blacker.Synology.Api.Models.DownloadStation
+{
+    [DataContract]
+    public class Info
+    {
+        [DataMember(Name = "version")]
+        public int Version { get; set; }
+
+        [DataMember(Name = "is_manager")]
+        public bool IsManager { get; set; }
+
+        [DataMember(Name = "version_string")]
+        public string VersionString { get; set; }
+    }
+}
