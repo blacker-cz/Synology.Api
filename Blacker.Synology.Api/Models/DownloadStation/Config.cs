@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Blacker.Synology.Api.Models.DownloadStation
 {
     [DataContract]
-    public class Config
+    public class Config : ResponseConfigBase
     {
         [DataMember(Name = "bt_max_download")]
         private int? _btMaxDownload;
@@ -84,57 +83,5 @@ namespace Blacker.Synology.Api.Models.DownloadStation
 
         [DataMember(Name = "emule_default_destination")]
         public string EMuleDefaultDestination { get; set; }
-
-        internal IDictionary<string, object> GetChangedProperties()
-        {
-            var result = new Dictionary<string, object>();
-
-            if (_btMaxDownload != null)
-            {
-                result["bt_max_download"] = _btMaxDownload.Value;
-            }
-            if (_btMaxUpload != null)
-            {
-                result["bt_max_upload"] = _btMaxUpload.Value;
-            }
-            if (_eMuleEnabled != null)
-            {
-                result["emule_enabled"] = _eMuleEnabled.Value;
-            }
-            if (_eMuleMaxDownload != null)
-            {
-                result["emule_max_download"] = _eMuleMaxDownload.Value;
-            }
-            if (_eMuleMaxUpload != null)
-            {
-                result["emule_max_upload"] = _eMuleMaxUpload.Value;
-            }
-            if (_ftpMaxDownload != null)
-            {
-                result["ftp_max_download"] = _ftpMaxDownload.Value;
-            }
-            if (_httpMaxDownload != null)
-            {
-                result["http_max_download"] = _httpMaxDownload.Value;
-            }
-            if (_nzbMaxDownload != null)
-            {
-                result["nzb_max_download"] = _nzbMaxDownload.Value;
-            }
-            if (_unzipServiceEnabled != null)
-            {
-                result["unzip_service_enabled"] = _unzipServiceEnabled.Value;
-            }
-            if (DefaultDestination != null)
-            {
-                result["default_destination"] = DefaultDestination;
-            }
-            if (EMuleDefaultDestination != null)
-            {
-                result["emule_default_destination"] = EMuleDefaultDestination;
-            }
-
-            return result;
-        }
     }
 }

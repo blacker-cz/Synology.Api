@@ -53,6 +53,8 @@
     <Compile Include="Models\AuthInfo.cs" />
     <Compile Include="Models\DownloadStation\Config.cs" />
     <Compile Include="Models\DownloadStation\Info.cs" />
+    <Compile Include="Models\DownloadStation\ScheduleConfig.cs" />
+    <Compile Include="Models\ResponseConfigBase.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\ResponseWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\DownloadStation\IInfoService.cs" />
     <Compile Include="Services\DownloadStation\InfoService.cs" />
+    <Compile Include="Services\DownloadStation\IScheduleService.cs" />
+    <Compile Include="Services\DownloadStation\ScheduleService.cs" />
     <Compile Include="Services\IApiInfoService.cs" />
     <Compile Include="Services\IAuthService.cs" />
   </ItemGroup>

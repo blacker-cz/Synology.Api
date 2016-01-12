@@ -57,6 +57,7 @@
     <Compile Include="Services\ApiInfoServiceTests.cs" />
     <Compile Include="Services\AuthServiceTests.cs" />
     <Compile Include="Services\DownloadStation\InfoServiceTests.cs" />
+    <Compile Include="Services\DownloadStation\ScheduleServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blacker.Synology.Api\Blacker.Synology.Api.csproj">
