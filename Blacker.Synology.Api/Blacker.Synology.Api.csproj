@@ -49,11 +49,27 @@
     <Compile Include="Client\ClientException.cs" />
     <Compile Include="Client\IClient.cs" />
     <Compile Include="Client\UriHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Models\ApiInfo.cs" />
     <Compile Include="Models\AuthInfo.cs" />
+    <Compile Include="Models\DownloadStation\AdditionalInfo.cs" />
+    <Compile Include="Models\DownloadStation\AdditionalInfoFlags.cs" />
     <Compile Include="Models\DownloadStation\Config.cs" />
+    <Compile Include="Models\DownloadStation\Detail.cs" />
+    <Compile Include="Models\DownloadStation\DownloadStatus.cs" />
+    <Compile Include="Models\DownloadStation\ErrorDetail.cs" />
+    <Compile Include="Models\DownloadStation\FileInfo.cs" />
     <Compile Include="Models\DownloadStation\Info.cs" />
+    <Compile Include="Models\DownloadStation\PeerInfo.cs" />
+    <Compile Include="Models\DownloadStation\Priority.cs" />
     <Compile Include="Models\DownloadStation\ScheduleConfig.cs" />
+    <Compile Include="Models\DownloadStation\StatusExtra.cs" />
+    <Compile Include="Models\DownloadStation\TaskActionResult.cs" />
+    <Compile Include="Models\DownloadStation\TaskInfo.cs" />
+    <Compile Include="Models\DownloadStation\TaskInfoList.cs" />
+    <Compile Include="Models\DownloadStation\TaskType.cs" />
+    <Compile Include="Models\DownloadStation\TrackerInfo.cs" />
+    <Compile Include="Models\DownloadStation\TransferInfo.cs" />
     <Compile Include="Models\ResponseConfigBase.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\ResponseWrapper.cs" />
@@ -67,7 +83,9 @@
     <Compile Include="Services\DownloadStation\IInfoService.cs" />
     <Compile Include="Services\DownloadStation\InfoService.cs" />
     <Compile Include="Services\DownloadStation\IScheduleService.cs" />
+    <Compile Include="Services\DownloadStation\ITaskService.cs" />
     <Compile Include="Services\DownloadStation\ScheduleService.cs" />
+    <Compile Include="Services\DownloadStation\TaskService.cs" />
     <Compile Include="Services\IApiInfoService.cs" />
     <Compile Include="Services\IAuthService.cs" />
   </ItemGroup>

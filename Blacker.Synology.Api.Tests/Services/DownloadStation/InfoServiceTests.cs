@@ -31,14 +31,13 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
 
             _clientMock.Setup((client => client.GetAsync<Info>(It.IsAny<string>(), It.IsAny<IDictionary<string, object>>())))
                 .Callback<string, IDictionary<string, object>>((s, objects) => { parameters = objects; })
-                .ReturnsAsync(new Info() {Version = 123});
+                .ReturnsAsync(new Info());
 
             var result = await _service.GetInfo();
 
             _clientMock.Verify((client => client.GetAsync<Info>("DownloadStation/info.cgi", It.IsAny<IDictionary<string, object>>())), Times.Once);
 
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Version, Is.EqualTo(123));
 
             var expected = new Dictionary<string, object>()
                            {

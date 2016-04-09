@@ -6,12 +6,12 @@ namespace Blacker.Synology.Api.Models.DownloadStation
     public class Info
     {
         [DataMember(Name = "version")]
-        public int Version { get; set; }
+        public int Version { get; private set; }
 
         [DataMember(Name = "is_manager")]
-        public bool IsManager { get; set; }
+        public bool IsManager { get; private set; }
 
         [DataMember(Name = "version_string")]
-        public string VersionString { get; set; }
+        public string VersionString { get; private set; }
     }
 }
