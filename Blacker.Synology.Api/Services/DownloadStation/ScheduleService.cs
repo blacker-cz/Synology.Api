@@ -30,7 +30,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                                                                                   {"api", "SYNO.DownloadStation.Schedule"},
                                                                                                   {"version", 1},
                                                                                                   {"method", "getconfig"},
-                                                                                                  {"sid", _authInfo.SessionId}
+                                                                                                  {"_sid", _authInfo.SessionId}
                                                                                               });
         }
 
@@ -47,7 +47,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
             properties["api"] = "SYNO.DownloadStation.Schedule";
             properties["version"] = 1;
             properties["method"] = "setconfig";
-            properties["sid"] = _authInfo.SessionId;
+            properties["_sid"] = _authInfo.SessionId;
 
             return _client.GetAsync(@"DownloadStation/schedule.cgi", properties);
         }

@@ -44,7 +44,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Info"},
                                {"version", 1},
                                {"method", "getinfo"},
-                               {"sid", _authInfo.SessionId}
+                               {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -71,7 +71,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Info"},
                                {"version", 1},
                                {"method", "getconfig"},
-                               {"sid", _authInfo.SessionId}
+                               {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -95,7 +95,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Info"},
                                {"version", 1},
                                {"method", "setserverconfig"},
-                               {"sid", _authInfo.SessionId},
+                               {"_sid", _authInfo.SessionId},
                                {"default_destination", "test"}
                            };
 
@@ -133,7 +133,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Info"},
                                {"version", 1},
                                {"method", "setserverconfig"},
-                               {"sid", _authInfo.SessionId},
+                               {"_sid", _authInfo.SessionId},
                                {"bt_max_upload", 1},
                                {"bt_max_download", 1},
                                {"emule_enabled", true},

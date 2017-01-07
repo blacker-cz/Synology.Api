@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Blacker.Synology.Api.Client;
 using Blacker.Synology.Api.Models;
@@ -32,7 +33,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"method", "list"},
                                  {"offset", offset},
                                  {"limit", limit},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             if (additional != AdditionalInfoFlags.None)
@@ -43,7 +44,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
             return _client.GetAsync<TaskInfoList>(@"DownloadStation/task.cgi", parameters);
         }
 
-        public Task<IEnumerable<TaskInfo>> GetInfo(IEnumerable<string> ids, AdditionalInfoFlags additional = AdditionalInfoFlags.None)
+        public Task<TaskInfoList> GetInfo(IEnumerable<string> ids, AdditionalInfoFlags additional = AdditionalInfoFlags.None)
         {
             if (ids == null)
                 throw new ArgumentNullException(nameof(ids));
@@ -59,7 +60,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"version", 1},
                                  {"method", "getinfo"},
                                  {"id", stringIds},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             if (additional != AdditionalInfoFlags.None)
@@ -67,7 +68,31 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                 parameters["additional"] = additional.ToString().ToLowerInvariant().Replace(" ", "");
             }
 
-            return _client.GetAsync<IEnumerable<TaskInfo>>(@"DownloadStation/task.cgi", parameters);
+            return _client.GetAsync<TaskInfoList>(@"DownloadStation/task.cgi", parameters);
+        }
+
+        public Task CreateTask(IEnumerable<string> uris, CreateTaskConfig config = null)
+        {
+            if (uris == null)
+                throw new ArgumentNullException(nameof(uris));
+
+            var stringUris = String.Join(",", uris);
+
+            if (String.IsNullOrWhiteSpace(stringUris))
+                throw new ArgumentException("Collection is empty.", nameof(uris));
+
+            var parameters = new Dictionary<string, object>()
+                             {
+                                 {"api", "SYNO.DownloadStation.Task"},
+                                 {"version", 3},
+                                 {"method", "create"},
+                                 {"uri", stringUris},
+                                 {"_sid", _authInfo.SessionId}
+                             };
+
+            config?.GetChangedProperties().Where(prop => prop.Key != null).ToList().ForEach(prop => parameters[prop.Key] = prop.Value);
+
+            return _client.PostAsync(@"DownloadStation/task.cgi", parameters);
         }
 
         public Task<IEnumerable<TaskActionResult>> DeleteTask(IEnumerable<string> ids, bool forceComplete)
@@ -87,7 +112,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"method", "delete"},
                                  {"id", stringIds},
                                  {"force_complete", forceComplete},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             return _client.GetAsync<IEnumerable<TaskActionResult>>(@"DownloadStation/task.cgi", parameters);
@@ -109,7 +134,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"version", 1},
                                  {"method", "pause"},
                                  {"id", stringIds},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             return _client.GetAsync<IEnumerable<TaskActionResult>>(@"DownloadStation/task.cgi", parameters);
@@ -131,7 +156,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"version", 1},
                                  {"method", "resume"},
                                  {"id", stringIds},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             return _client.GetAsync<IEnumerable<TaskActionResult>>(@"DownloadStation/task.cgi", parameters);
@@ -157,7 +182,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                  {"method", "edit"},
                                  {"id", stringIds},
                                  {"destination", destination},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                              };
 
             return _client.GetAsync<IEnumerable<TaskActionResult>>(@"DownloadStation/task.cgi", parameters);

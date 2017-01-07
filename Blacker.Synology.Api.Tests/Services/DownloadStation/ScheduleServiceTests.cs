@@ -46,7 +46,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Schedule"},
                                {"version", 1},
                                {"method", "getconfig"},
-                               {"sid", _authInfo.SessionId}
+                               {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -70,7 +70,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"api", "SYNO.DownloadStation.Schedule"},
                                {"version", 1},
                                {"method", "setconfig"},
-                               {"sid", _authInfo.SessionId},
+                               {"_sid", _authInfo.SessionId},
                                {"enabled", true},
                                {"emule_enabled", false}
                            };

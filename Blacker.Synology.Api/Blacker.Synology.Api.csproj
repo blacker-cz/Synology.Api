@@ -55,6 +55,7 @@
     <Compile Include="Models\DownloadStation\AdditionalInfo.cs" />
     <Compile Include="Models\DownloadStation\AdditionalInfoFlags.cs" />
     <Compile Include="Models\DownloadStation\Config.cs" />
+    <Compile Include="Models\DownloadStation\CreateTaskConfig.cs" />
     <Compile Include="Models\DownloadStation\Detail.cs" />
     <Compile Include="Models\DownloadStation\DownloadStatus.cs" />
     <Compile Include="Models\DownloadStation\ErrorDetail.cs" />

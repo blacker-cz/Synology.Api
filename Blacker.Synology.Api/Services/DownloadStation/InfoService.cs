@@ -29,7 +29,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                                                                                   {"api", "SYNO.DownloadStation.Info"},
                                                                                                   {"version", 1},
                                                                                                   {"method", "getinfo"},
-                                                                                                  {"sid", _authInfo.SessionId}
+                                                                                                  {"_sid", _authInfo.SessionId}
                                                                                               });
         }
 
@@ -40,7 +40,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
                                                                                                   {"api", "SYNO.DownloadStation.Info"},
                                                                                                   {"version", 1},
                                                                                                   {"method", "getconfig"},
-                                                                                                  {"sid", _authInfo.SessionId}
+                                                                                                  {"_sid", _authInfo.SessionId}
                                                                                               });
         }
 
@@ -57,7 +57,7 @@ namespace Blacker.Synology.Api.Services.DownloadStation
             properties["api"] = "SYNO.DownloadStation.Info";
             properties["version"] = 1;
             properties["method"] = "setserverconfig";
-            properties["sid"] = _authInfo.SessionId;
+            properties["_sid"] = _authInfo.SessionId;
 
             return _client.GetAsync(@"DownloadStation/info.cgi", properties);
         }

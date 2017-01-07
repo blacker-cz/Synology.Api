@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Blacker.Synology.Api.Client;
 using Blacker.Synology.Api.Models;
 using Blacker.Synology.Api.Models.DownloadStation;
+using Blacker.Synology.Api.Services;
 using Blacker.Synology.Api.Services.DownloadStation;
 using Moq;
 using NUnit.Framework;
@@ -133,7 +134,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"method", "list"},
                                {"offset", offset},
                                {"limit", limit},
-                               {"sid", _authInfo.SessionId}
+                               {"_sid", _authInfo.SessionId}
                            };
 
             if (flagsExpected != null)
@@ -164,13 +165,13 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
         {
             IDictionary<string, object> parameters = null;
 
-            _clientMock.Setup((client => client.GetAsync<IEnumerable<TaskInfo>>(It.IsAny<string>(), It.IsAny<IDictionary<string, object>>())))
+            _clientMock.Setup((client => client.GetAsync<TaskInfoList>(It.IsAny<string>(), It.IsAny<IDictionary<string, object>>())))
                 .Callback<string, IDictionary<string, object>>((s, objects) => { parameters = objects; })
-                .ReturnsAsync(Enumerable.Empty<TaskInfo>());
+                .ReturnsAsync(new TaskInfoList());
 
             var result = await _service.GetInfo(ids, flags);
 
-            _clientMock.Verify((client => client.GetAsync<IEnumerable<TaskInfo>>("DownloadStation/task.cgi", It.IsAny<IDictionary<string, object>>())), Times.Once);
+            _clientMock.Verify((client => client.GetAsync<TaskInfoList>("DownloadStation/task.cgi", It.IsAny<IDictionary<string, object>>())), Times.Once);
 
             Assert.That(result, Is.Not.Null);
 
@@ -180,13 +181,55 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                {"version", 1},
                                {"method", "getinfo"},
                                {"id", idsExpected},
-                               {"sid", _authInfo.SessionId}
+                               {"_sid", _authInfo.SessionId}
                            };
 
             if (flagsExpected != null)
             {
                 expected["additional"] = flagsExpected;
             }
+
+            CollectionAssert.AreEquivalent(expected, parameters);
+        }
+
+        [Test]
+        public async Task CreateTaskThrowsOnNullUrisTest()
+        {
+            await AssertHelpers.ThrowsAsync<ArgumentNullException>(() => _service.CreateTask(null));
+        }
+
+        [Test]
+        public async Task CreateTaskThrowsOnEmptyUrisTest()
+        {
+            await AssertHelpers.ThrowsAsync<ArgumentException>(() => _service.CreateTask(Enumerable.Empty<string>()));
+        }
+
+        [TestCase(new [] {"http://test"}, "http://test")]
+        [TestCase(new [] {"http://test", "ftp://test2"}, "http://test,ftp://test2")]
+        public async Task CreateTaskUsingUrisTest(IEnumerable<string> uris, string expectedUris)
+        {
+            IDictionary<string, object> parameters = null;
+
+            _clientMock.Setup((client => client.PostAsync(It.IsAny<string>(), It.IsAny<IDictionary<string, object>>())))
+                .Callback<string, IDictionary<string, object>>((s, objects) => { parameters = objects; })
+                .Returns(Task.FromResult(default(object)));
+
+            await _service.CreateTask(uris, new CreateTaskConfig()
+                                            {
+                                                Destination = "destination"
+                                            });
+
+            _clientMock.Verify((client => client.PostAsync("DownloadStation/task.cgi", It.IsAny<IDictionary<string, object>>())), Times.Once);
+
+            var expected = new Dictionary<string, object>()
+                           {
+                                 {"api", "SYNO.DownloadStation.Task"},
+                                 {"version", 3},
+                                 {"method", "create"},
+                                 {"uri", expectedUris},
+                                 {"_sid", _authInfo.SessionId},
+                                 {"destination", "destination"},
+                           };
 
             CollectionAssert.AreEquivalent(expected, parameters);
         }
@@ -226,7 +269,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                  {"method", "delete"},
                                  {"id", idsExpected},
                                  {"force_complete", force},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -266,7 +309,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                  {"version", 1},
                                  {"method", "pause"},
                                  {"id", idsExpected},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -306,7 +349,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                  {"version", 1},
                                  {"method", "resume"},
                                  {"id", idsExpected},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
@@ -355,7 +398,7 @@ namespace Blacker.Synology.Api.Tests.Services.DownloadStation
                                  {"method", "edit"},
                                  {"id", idsExpected},
                                  {"destination", destination},
-                                 {"sid", _authInfo.SessionId}
+                                 {"_sid", _authInfo.SessionId}
                            };
 
             CollectionAssert.AreEquivalent(expected, parameters);
